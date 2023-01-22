@@ -7,9 +7,9 @@ import Feeling from '../Feeling';
 
 
 function App() {
-  const [feelingInput, setFeelingInput] = useState(0);
-  const [understandingInput, setUnderstandingInput] = useState(0);
-  const [supportInput, setSupportInput] = useState(0);
+  const [feelingInput, setFeelingInput] = useState('');
+  const [understandingInput, setUnderstandingInput] = useState('');
+  const [supportInput, setSupportInput] = useState('');
   const [commentInput, setCommentInput] = useState('');
 
   // useSelector: this is the hook we use to GET or READ
@@ -30,6 +30,7 @@ function App() {
       method: 'GET',
       url: '/feedback'
     }).then((response) => {
+      console.log('GET /feedback:')
       console.table(response.data);
       // Now we need to send the array of objects to
       // our reducer:
@@ -46,7 +47,11 @@ function App() {
     event.preventDefault();
 
     console.log(`dispatch feedback`, {
-      feelingInput, understandingInput, supportInput, commentInput});
+      feelingInput, 
+      understandingInput, 
+      supportInput, 
+      commentInput
+    });
 
     dispatch({
       type: 'SET_FEEDBACKLIST',
@@ -67,7 +72,7 @@ function App() {
         feeling: feelingInput,
         understanding: understandingInput,
         support: supportInput,
-        comment: commentInput
+        comments: commentInput
       }
     }).then((response) => {
       // Call the fetchFeedback function, which is going to
@@ -87,9 +92,19 @@ function App() {
         </header>
 
         {/* Feeling Page */}
-        <Route>
+        <h2>How are you feeling today?</h2>
+        <form onSubmit={handleDispatch}>
+          <input 
+            required="required"
+            type="number"
+            value={feelingInput}
+            onChange={(event) => setFeelingInput(event.target.value)}
+          />
+          <button type="submit">Next</button>
+        </form>
+        {/* <Route>
           <Feeling />
-        </Route>
+        </Route> */}
 
         {/* Understanding Page */}
         <h2>How well are you understanding the content?</h2>

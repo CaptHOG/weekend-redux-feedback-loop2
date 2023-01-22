@@ -10,7 +10,9 @@ import logger from 'redux-logger';
 
 const feedbackList = (state=[], action) => {
   if (action.type === 'SET_FEEDBACKLIST') {
-    return action.payload
+    console.log('action.payload from reducer', action.payload)
+    console.log('action from feedbackList', action)
+    return action.payload;
   }
   return state
 }

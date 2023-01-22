@@ -27,7 +27,7 @@ router.post('/',  (req, res) => {
     newFeedback.feeling, 
     newFeedback.understanding,
     newFeedback.support,
-    newFeedback.comments
+    newFeedback.comment
     ])
     .then(result => {
       res.sendStatus(201);
