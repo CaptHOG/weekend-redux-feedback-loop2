@@ -88,7 +88,7 @@ function App() {
 
         {/* Feeling Page */}
         <Route>
-          <Feeling handleDispatch={handleDispatch}/>
+          <Feeling />
         </Route>
 
         {/* Understanding Page */}
