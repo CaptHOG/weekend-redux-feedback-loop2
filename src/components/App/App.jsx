@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import Feeling from '../Feeling';
 
 
 function App() {
-  const [feelingInput, setFeelingInput] = useState('');
-  const [understandingInput, setUnderstandingInput] = useState('');
+  const [feelingInput, setFeelingInput] = useState(0);
+  const [understandingInput, setUnderstandingInput] = useState(0);
+  const [supportInput, setSupportInput] = useState(0);
+  const [commentInput, setCommentInput] = useState('');
 
   // useSelector: this is the hook we use to GET or READ
   // data from the Redux store.
@@ -38,66 +42,105 @@ function App() {
     })
   }
 
-  const handleSubmit = event => {
+  const handleDispatch = event => {
     event.preventDefault();
 
-    console.log(`Adding feedback`, {feelingInput});
+    console.log(`dispatch feedback`, {
+      feelingInput, understandingInput, supportInput, commentInput});
 
     dispatch({
       type: 'SET_FEEDBACKLIST',
       payload: {
-        feeling: feelingInput
+        feeling: feelingInput,
+        understanding: understandingInput,
+        support: supportInput,
+        comment: commentInput
       }
     })
-
-    // axios({
-    //   method: 'POST',
-    //   url: '/feedback',
-    //   data: {
-    //     feeling: feelingInput
-    //   }
-    // }).then((response) => {
-    //   // Call the fetchFeedback function, which is going to
-    //   // GET /feedback, then update the feedbackList reducer:
-    //   fetchFeedback();
-    // }).catch((err) => {
-    //   console.error('handleSubmit fail:', err)
-    // })
   };
 
+  const handlePost = () => {
+    axios({
+      method: 'POST',
+      url: '/feedback',
+      data: {
+        feeling: feelingInput,
+        understanding: understandingInput,
+        support: supportInput,
+        comment: commentInput
+      }
+    }).then((response) => {
+      // Call the fetchFeedback function, which is going to
+      // GET /feedback, then update the feedbackList reducer:
+      fetchFeedback();
+    }).catch((err) => {
+      console.error('handleSubmit fail:', err)
+    })
+  }
+
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <h1 className='App-title'>Feedback!</h1>
-        <h4>Don't forget it!</h4>
-      </header>
+    <Router>
+      <div className='App'>
+        <header className='App-header'>
+          <h1 className='App-title'>Feedback!</h1>
+          <h4>Don't forget it!</h4>
+        </header>
 
-      {/* Feeling Page */}
-      <h2>How are you feeling today?</h2>
-      <form onSubmit={handleSubmit}>
-        <input 
-          required="required"
-          type="number"
-          value={feelingInput}
-          onChange={(event) => setFeelingInput(event.target.value)}
-        />
-        <button type="submit">Next</button>
-      </form>
+        {/* Feeling Page */}
+        <Route>
+          <Feeling handleDispatch={handleDispatch}/>
+        </Route>
 
-      {/* Understanding Page */}
-      <h2>How well are you understanding the content?</h2>
-      <form onSubmit={handleSubmit}>
-        <input 
-          required="required"
-          type="number"
-          value={understandingInput}
-          onChange={(event) => setUnderstandingInput(event.target.value)}
-        />
-        <button type="submit">Next</button>
-      </form>
+        {/* Understanding Page */}
+        <h2>How well are you understanding the content?</h2>
+        <form onSubmit={handleDispatch}>
+          <input 
+            required="required"
+            type="number"
+            value={understandingInput}
+            onChange={(event) => setUnderstandingInput(event.target.value)}
+          />
+          <button type="submit">Next</button>
+        </form>
 
-      {/* Last Page */}
-    </div>
+        {/* Support Page */}
+        <h2>How well are you being supported?</h2>
+        <form onSubmit={handleDispatch}>
+          <input 
+            required="required"
+            type="number"
+            value={supportInput}
+            onChange={(event) => setSupportInput(event.target.value)}
+          />
+          <button type="submit">Next</button>
+        </form>
+
+        {/* Comment Page */}
+        <h2>Any comments you want to leave?</h2>
+        <form onSubmit={handleDispatch}>
+          <input 
+            type="text"
+            value={commentInput}
+            onChange={(event) => setCommentInput(event.target.value)}
+          />
+          <button type="submit">Next</button>
+        </form>
+
+        {/* Review Page */}
+        <h1>Review Your Feedback</h1>
+        <form onSubmit={handlePost}>
+          <p>Feeling: {feedbackList.feeling}</p>
+          <p>Understanding: {feedbackList.understanding}</p>
+          <p>Support: {feedbackList.support}</p>
+          <p>Comments: {feedbackList.comment}</p>
+          <button type="submit">Submit</button>
+        </form>
+
+        {/* Thank You Page */}
+        <h1>Thank You!</h1>
+        <button>Leave New Feedback</button>
+      </div>
+    </Router>
   );
 }
 
