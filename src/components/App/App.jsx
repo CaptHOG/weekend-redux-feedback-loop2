@@ -10,6 +10,13 @@ function App() {
         <h1 className='App-title'>Feedback!</h1>
         <h4>Don't forget it!</h4>
       </header>
+
+      {/* First Page */}
+      <h2>How are you feeling today?</h2>
+      <input type="number"/>
+      <button>Next</button>
+
+      {/* Last Page */}
     </div>
   );
 }
