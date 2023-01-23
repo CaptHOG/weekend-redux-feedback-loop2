@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 function Understanding() {
   const [understandingInput, setUnderstandingInput] = useState('');
-
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const dispatchUnderstanding = (event) => {
     event.preventDefault();
@@ -14,6 +14,7 @@ function Understanding() {
       type: 'ADD_UNDERSTANDING',
       payload: understandingInput
     })
+    history.push('/support');
   }
 
   return (
@@ -26,7 +27,7 @@ function Understanding() {
             value={understandingInput}
             onChange={(event) => setUnderstandingInput(event.target.value)}
           />
-          <Link to='/support'><button type="submit">Next</button></Link>
+          <button>Next</button>
         </form>
     </>
   )

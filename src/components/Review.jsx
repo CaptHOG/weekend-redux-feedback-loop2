@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 
 function Review() {
@@ -8,18 +9,20 @@ function Review() {
   const support = useSelector(store => store.support);
   const comments = useSelector(store => store.comments);
 
-  const handlePost = () => {
+  const handlePost = (event) => {
+    event.preventDefault();
+
     axios({
       method: 'POST',
       url: '/feedback',
       data: {
-        feeling: feeling,
-        understanding: understanding,
-        support: support,
-        comments: comments
+        feeling,
+        understanding,
+        support,
+        comments
       }
     }).then((response) => {
-      console.log('something posted:', response);
+      console.log('response:', response);
     }).catch((err) => {
       console.error('handleSubmit fail:', err)
     })
@@ -28,13 +31,11 @@ function Review() {
   return (
     <>
       <h1>Review Your Feedback</h1>
-        <form onSubmit={handlePost}>
-          <p>Feeling: {feeling}</p>
-          <p>Understanding: {understanding}</p>
-          <p>Support: {support}</p>
-          <p>Comments: {comments}</p>
-          <button type="submit">Submit</button>
-        </form>
+      <p>Feeling: {feeling}</p>
+      <p>Understanding: {understanding}</p>
+      <p>Support: {support}</p>
+      <p>Comments: {comments}</p>
+      <button onClick={handlePost}>Submit</button>
     </>
   )
 }

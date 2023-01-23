@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 function Comments() {
   const [commentInput, setCommentInput] = useState('');
-
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const dispatchComments = (event) => {
     event.preventDefault();
@@ -14,6 +14,7 @@ function Comments() {
       type: 'ADD_COMMENTS',
       payload: commentInput
     })
+    history.push('/review');
   }
 
   return (
@@ -26,7 +27,7 @@ function Comments() {
             value={commentInput}
             onChange={(event) => setCommentInput(event.target.value)}
           />
-          <Link to='/review'><button type="submit">Next</button></Link>
+          <button>Next</button>
         </form>
     </>
   )

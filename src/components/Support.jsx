@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 function Support() {
   const [supportInput, setSupportInput] = useState('');
-
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const dispatchSupport = (event) => {
     event.preventDefault();
@@ -14,6 +14,7 @@ function Support() {
       type: 'ADD_SUPPORT',
       payload: supportInput
     })
+    history.push('/comments')
   }
 
   return (
@@ -26,7 +27,7 @@ function Support() {
             value={supportInput}
             onChange={(event) => setSupportInput(event.target.value)}
           />
-          <Link to='/comments'><button type="submit">Next</button></Link>
+          <button>Next</button>
         </form>
     </>
   )
