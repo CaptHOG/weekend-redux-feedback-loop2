@@ -8,14 +8,31 @@ function Review() {
   const support = useSelector(store => store.support);
   const comments = useSelector(store => store.comments);
 
+  const handlePost = () => {
+    axios({
+      method: 'POST',
+      url: '/feedback',
+      data: {
+        feeling: feeling,
+        understanding: understanding,
+        support: support,
+        comments: comments
+      }
+    }).then((response) => {
+      console.log('something posted:', response);
+    }).catch((err) => {
+      console.error('handleSubmit fail:', err)
+    })
+  }
+
   return (
     <>
       <h1>Review Your Feedback</h1>
         <form onSubmit={handlePost}>
-          <p>Feeling: {feedbackList.feeling}</p>
-          <p>Understanding: {feedbackList.understanding}</p>
-          <p>Support: {feedbackList.support}</p>
-          <p>Comments: {feedbackList.comment}</p>
+          <p>Feeling: {feeling}</p>
+          <p>Understanding: {understanding}</p>
+          <p>Support: {support}</p>
+          <p>Comments: {comments}</p>
           <button type="submit">Submit</button>
         </form>
     </>

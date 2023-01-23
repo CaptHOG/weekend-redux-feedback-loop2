@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 function Understanding() {
@@ -25,7 +26,7 @@ function Understanding() {
             value={understandingInput}
             onChange={(event) => setUnderstandingInput(event.target.value)}
           />
-          <button type="submit">Next</button>
+          <Link to='/support'><button type="submit">Next</button></Link>
         </form>
     </>
   )

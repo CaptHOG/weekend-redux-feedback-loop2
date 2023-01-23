@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 function Support() {
@@ -25,7 +26,7 @@ function Support() {
             value={supportInput}
             onChange={(event) => setSupportInput(event.target.value)}
           />
-          <button type="submit">Next</button>
+          <Link to='/comments'><button type="submit">Next</button></Link>
         </form>
     </>
   )

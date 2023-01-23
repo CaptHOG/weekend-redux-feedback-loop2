@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import './App.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import Feeling from '../Feeling.jsx';
 import Understanding from '../Understanding.jsx';
@@ -12,56 +10,6 @@ import ThankYou from '../ThankYou.jsx';
 
 
 function App() {
-  // useSelector: this is the hook we use to GET or READ
-  // data from the Redux store.
-  const feedbackList = useSelector(store => store.feedbackList);
-
-  const dispatch = useDispatch();
-
-  // useEffect: so each time this component mounts
-  // on the DOM, it will fire off the GET /feedback
-  // request
-  useEffect(() => {
-    fetchFeedback();
-  }, [])
-
-  const fetchFeedback = () => {
-    axios({
-      method: 'GET',
-      url: '/feedback'
-    }).then((response) => {
-      console.log('GET /feedback:')
-      console.table(response.data);
-      // Now we need to send the array of objects to
-      // our reducer:
-      dispatch({
-        type: 'SET_FEEDBACKLIST',
-        payload: response.data // 👈 this is array of objects
-      })
-    }).catch((err) => {
-      console.error('feedbackList useEffect fail:', err)
-    })
-  }
-
-  const handlePost = () => {
-    axios({
-      method: 'POST',
-      url: '/feedback',
-      data: {
-        feeling: feelingInput,
-        understanding: understandingInput,
-        support: supportInput,
-        comments: commentInput
-      }
-    }).then((response) => {
-      // Call the fetchFeedback function, which is going to
-      // GET /feedback, then update the feedbackList reducer:
-      fetchFeedback();
-    }).catch((err) => {
-      console.error('handleSubmit fail:', err)
-    })
-  }
-
   return (
     <Router>
       <div className='App'>
@@ -85,7 +33,7 @@ function App() {
           <Support />
         </Route>
 
-        {/* Comment Page */}
+        {/* Comments Page */}
         <Route exact path='/comments'>
           <Comments />
         </Route>
@@ -96,7 +44,7 @@ function App() {
         </Route>
 
         {/* Thank You Page */}
-        <Route>
+        <Route exact path='/thankYou'>
           <ThankYou />
         </Route>
       </div>

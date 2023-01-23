@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 function Comments() {
@@ -25,7 +26,7 @@ function Comments() {
             value={commentInput}
             onChange={(event) => setCommentInput(event.target.value)}
           />
-          <button type="submit">Next</button>
+          <Link to='/review'><button type="submit">Next</button></Link>
         </form>
     </>
   )
