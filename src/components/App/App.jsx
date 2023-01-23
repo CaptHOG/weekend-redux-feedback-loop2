@@ -4,14 +4,10 @@ import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import Feeling from '../Feeling';
+import Understanding from '../Understanding';
 
 
 function App() {
-  const [feelingInput, setFeelingInput] = useState('');
-  const [understandingInput, setUnderstandingInput] = useState('');
-  const [supportInput, setSupportInput] = useState('');
-  const [commentInput, setCommentInput] = useState('');
-
   // useSelector: this is the hook we use to GET or READ
   // data from the Redux store.
   const feedbackList = useSelector(store => store.feedbackList);
@@ -85,54 +81,22 @@ function App() {
         </header>
 
         {/* Feeling Page */}
-        {/* <h2>How are you feeling today?</h2>
-        <form onSubmit={handleDispatch}>
-          <input 
-            required="required"
-            type="number"
-            value={feelingInput}
-            onChange={(event) => setFeelingInput(event.target.value)}
-          />
-          <button type="submit">Next</button>
-        </form> */}
-        <Route>
+        <Route exact path='/'>
           <Feeling />
         </Route>
 
         {/* Understanding Page */}
-        <h2>How well are you understanding the content?</h2>
-        <form onSubmit={handleDispatch}>
-          <input 
-            required="required"
-            type="number"
-            value={understandingInput}
-            onChange={(event) => setUnderstandingInput(event.target.value)}
-          />
-          <button type="submit">Next</button>
-        </form>
+        <Route exact path='/understanding'>
+          <Understanding />
+        </Route>
 
         {/* Support Page */}
-        <h2>How well are you being supported?</h2>
-        <form onSubmit={handleDispatch}>
-          <input 
-            required="required"
-            type="number"
-            value={supportInput}
-            onChange={(event) => setSupportInput(event.target.value)}
-          />
-          <button type="submit">Next</button>
-        </form>
+        <Route exact path='/support'>
+          <Support />
+        </Route>
 
         {/* Comment Page */}
-        <h2>Any comments you want to leave?</h2>
-        <form onSubmit={handleDispatch}>
-          <input 
-            type="text"
-            value={commentInput}
-            onChange={(event) => setCommentInput(event.target.value)}
-          />
-          <button type="submit">Next</button>
-        </form>
+        
 
         {/* Review Page */}
         <h1>Review Your Feedback</h1>

@@ -4,30 +4,21 @@ import { useDispatch } from "react-redux";
 
 function Feeling() {
   const [feelingInput, setFeelingInput] = useState('');
-  // const [understandingInput, setUnderstandingInput] = useState('');
-  // const [supportInput, setSupportInput] = useState('');
-  // const [commentInput, setCommentInput] = useState('');
 
   const dispatch = useDispatch();
 
-  const handleDispatch = event => {
+  const dispatchFeeling = (event) => {
     event.preventDefault();
-
     dispatch({
-      type: 'ADD_FEEDBACK',
-      payload: {
-        feeling: feelingInput,
-        // understanding: understandingInput,
-        // support: supportInput,
-        // comments: commentInput
-      }
+      type: 'ADD_FEELING',
+      payload: feelingInput
     })
   };
 
   return (
     <>
       <h2>How are you feeling today?</h2>
-      <form onSubmit={handleDispatch}>
+      <form onSubmit={dispatchFeeling}>
         <input 
           required="required"
           type="number"
