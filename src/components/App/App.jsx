@@ -3,8 +3,12 @@ import axios from 'axios';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import Feeling from '../Feeling';
-import Understanding from '../Understanding';
+import Feeling from '../Feeling.jsx';
+import Understanding from '../Understanding.jsx';
+import Support from '../Support.jsx';
+import Comments from '../Comments.jsx';
+import Review from '../Review.jsx';
+import ThankYou from '../ThankYou.jsx';
 
 
 function App() {
@@ -38,20 +42,6 @@ function App() {
       console.error('feedbackList useEffect fail:', err)
     })
   }
-
-  const handleDispatch = event => {
-    event.preventDefault();
-
-    dispatch({
-      type: 'ADD_FEEDBACK',
-      payload: {
-        // feeling: feelingInput,
-        understanding: understandingInput,
-        support: supportInput,
-        comment: commentInput
-      }
-    })
-  };
 
   const handlePost = () => {
     axios({
@@ -96,21 +86,19 @@ function App() {
         </Route>
 
         {/* Comment Page */}
-        
+        <Route exact path='/comments'>
+          <Comments />
+        </Route>
 
         {/* Review Page */}
-        <h1>Review Your Feedback</h1>
-        <form onSubmit={handlePost}>
-          <p>Feeling: {feedbackList.feeling}</p>
-          <p>Understanding: {feedbackList.understanding}</p>
-          <p>Support: {feedbackList.support}</p>
-          <p>Comments: {feedbackList.comment}</p>
-          <button type="submit">Submit</button>
-        </form>
+        <Route exact path='/review'>
+          <Review />
+        </Route>
 
         {/* Thank You Page */}
-        <h1>Thank You!</h1>
-        <button>Leave New Feedback</button>
+        <Route>
+          <ThankYou />
+        </Route>
       </div>
     </Router>
   );
