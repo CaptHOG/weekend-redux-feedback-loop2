@@ -9,17 +9,66 @@ import logger from 'redux-logger';
 
 
 const feedbackList = (state=[], action) => {
-  if (action.type === 'SET_FEEDBACKLIST') {
-    console.log('action.payload from reducer', action.payload)
-    console.log('action from feedbackList', action)
-    return action.payload;
+  switch (action.type) {
+    case 'SET_FEEDBACKLIST':
+      return [...state, action.payload];
+    default: {
+      return state;
+    }
   }
-  return state
+}
+
+const feeling = (state=0, action) => {
+  switch (action.type) {
+    case 'ADD_FEELING': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+const understanding = (state=0, action) => {
+  switch (action.type) {
+    case 'ADD_UNDERSTANDING': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+const support = (state=0, action) => {
+  switch (action.type) {
+    case 'ADD_SUPPORT': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+const comments = (state='', action) => {
+  switch (action.type) {
+    case 'ADD_COMMENTS': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
 }
 
 const reduxStore = createStore(
   combineReducers({
-    feedbackList
+    feedbackList,
+    feeling,
+    understanding,
+    support,
+    comments
   }),
   applyMiddleware(logger)
 );

@@ -1,51 +1,36 @@
-// import { useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 
-// function Feeling() {
-//   const [feelingInput, setFeelingInput] = useState('');
-//   const [understandingInput, setUnderstandingInput] = useState('');
-//   const [supportInput, setSupportInput] = useState('');
-//   const [commentInput, setCommentInput] = useState('');
+function Feeling() {
+  const [feelingInput, setFeelingInput] = useState('');
 
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-//   const handleDispatch = event => {
-//     event.preventDefault();
+  const dispatchFeeling = (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'ADD_FEELING',
+      payload: feelingInput
+    })
+  };
 
-//     console.log(`dispatch feedback:`, {
-//       feelingInput, 
-//       understandingInput, 
-//       supportInput, 
-//       commentInput
-//     });
-
-//     dispatch({
-//       type: 'SET_FEEDBACKLIST',
-//       payload: {
-//         feeling: feelingInput,
-//         understanding: understandingInput,
-//         support: supportInput,
-//         comments: commentInput
-//       }
-//     })
-//   };
-
-//   return (
-//     <>
-//       <h2>How are you feeling today?</h2>
-//       <form onSubmit={handleDispatch}>
-//         <input 
-//           required="required"
-//           type="number"
-//           value={feelingInput}
-//           onChange={(event) => setFeelingInput(event.target.value)}
-//         />
-//         <button type="submit">Next</button>
-//       </form>
-//     </>
-//   )
-// }
+  return (
+    <>
+      <h2>How are you feeling today?</h2>
+      <form onSubmit={dispatchFeeling}>
+        <input 
+          required="required"
+          type="number"
+          value={feelingInput}
+          onChange={(event) => setFeelingInput(event.target.value)}
+        />
+        <Link to='/understanding'><button type="submit">Next</button></Link>
+      </form>
+    </>
+  )
+}
 
 
-// export default Feeling;
+export default Feeling;
