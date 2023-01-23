@@ -46,17 +46,10 @@ function App() {
   const handleDispatch = event => {
     event.preventDefault();
 
-    console.log(`dispatch feedback`, {
-      feelingInput, 
-      understandingInput, 
-      supportInput, 
-      commentInput
-    });
-
     dispatch({
-      type: 'SET_FEEDBACKLIST',
+      type: 'ADD_FEEDBACK',
       payload: {
-        feeling: feelingInput,
+        // feeling: feelingInput,
         understanding: understandingInput,
         support: supportInput,
         comment: commentInput
@@ -92,7 +85,7 @@ function App() {
         </header>
 
         {/* Feeling Page */}
-        <h2>How are you feeling today?</h2>
+        {/* <h2>How are you feeling today?</h2>
         <form onSubmit={handleDispatch}>
           <input 
             required="required"
@@ -101,10 +94,10 @@ function App() {
             onChange={(event) => setFeelingInput(event.target.value)}
           />
           <button type="submit">Next</button>
-        </form>
-        {/* <Route>
+        </form> */}
+        <Route>
           <Feeling />
-        </Route> */}
+        </Route>
 
         {/* Understanding Page */}
         <h2>How well are you understanding the content?</h2>

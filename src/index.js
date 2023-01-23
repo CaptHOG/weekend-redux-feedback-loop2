@@ -10,11 +10,11 @@ import logger from 'redux-logger';
 
 const feedbackList = (state=[], action) => {
   if (action.type === 'SET_FEEDBACKLIST') {
-    console.log('action.payload from reducer', action.payload)
-    console.log('action from feedbackList', action)
-    return action.payload;
+    return [...state, action.payload];
+  } else if (action.type === 'ADD_FEEDBACK') {
+    return [...state, action.payload];
   }
-  return state
+  return state;
 }
 
 const reduxStore = createStore(

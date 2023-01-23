@@ -1,51 +1,44 @@
-// import { useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 
-// function Feeling() {
-//   const [feelingInput, setFeelingInput] = useState('');
-//   const [understandingInput, setUnderstandingInput] = useState('');
-//   const [supportInput, setSupportInput] = useState('');
-//   const [commentInput, setCommentInput] = useState('');
+function Feeling() {
+  const [feelingInput, setFeelingInput] = useState('');
+  // const [understandingInput, setUnderstandingInput] = useState('');
+  // const [supportInput, setSupportInput] = useState('');
+  // const [commentInput, setCommentInput] = useState('');
 
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-//   const handleDispatch = event => {
-//     event.preventDefault();
+  const handleDispatch = event => {
+    event.preventDefault();
 
-//     console.log(`dispatch feedback:`, {
-//       feelingInput, 
-//       understandingInput, 
-//       supportInput, 
-//       commentInput
-//     });
+    dispatch({
+      type: 'ADD_FEEDBACK',
+      payload: {
+        feeling: feelingInput,
+        // understanding: understandingInput,
+        // support: supportInput,
+        // comments: commentInput
+      }
+    })
+  };
 
-//     dispatch({
-//       type: 'SET_FEEDBACKLIST',
-//       payload: {
-//         feeling: feelingInput,
-//         understanding: understandingInput,
-//         support: supportInput,
-//         comments: commentInput
-//       }
-//     })
-//   };
-
-//   return (
-//     <>
-//       <h2>How are you feeling today?</h2>
-//       <form onSubmit={handleDispatch}>
-//         <input 
-//           required="required"
-//           type="number"
-//           value={feelingInput}
-//           onChange={(event) => setFeelingInput(event.target.value)}
-//         />
-//         <button type="submit">Next</button>
-//       </form>
-//     </>
-//   )
-// }
+  return (
+    <>
+      <h2>How are you feeling today?</h2>
+      <form onSubmit={handleDispatch}>
+        <input 
+          required="required"
+          type="number"
+          value={feelingInput}
+          onChange={(event) => setFeelingInput(event.target.value)}
+        />
+        <button type="submit">Next</button>
+      </form>
+    </>
+  )
+}
 
 
-// export default Feeling;
+export default Feeling;
