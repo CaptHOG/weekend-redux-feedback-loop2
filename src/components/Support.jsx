@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 
 function Support() {
@@ -20,6 +20,7 @@ function Support() {
   return (
     <>
       <h2>How well are you being supported?</h2>
+      <p>low 1 - 5 high</p>
         <form onSubmit={dispatchSupport}>
           <input 
             required="required"

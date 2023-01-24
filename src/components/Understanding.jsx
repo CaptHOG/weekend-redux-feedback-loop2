@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 
 function Understanding() {
@@ -20,6 +20,7 @@ function Understanding() {
   return (
     <>
       <h2>How well are you understanding the content?</h2>
+      <p>low 1 - 5 high</p>
         <form onSubmit={dispatchUnderstanding}>
           <input 
             required="required"

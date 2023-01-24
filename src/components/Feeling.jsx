@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 
 function Feeling() {
-  const [feelingInput, setFeelingInput] = useState(0);
+  const [feelingInput, setFeelingInput] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -20,10 +20,9 @@ function Feeling() {
   return (
     <>
       <h2>How are you feeling today?</h2>
+      <p>low 1 - 5 high</p>
       <form onSubmit={dispatchFeeling}>
         <input 
-          min="1"
-          max="5"
           type="number"
           value={feelingInput}
           required="required"

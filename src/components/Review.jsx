@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 
 function Review() {
@@ -8,6 +9,8 @@ function Review() {
   const understanding = useSelector(store => store.understanding);
   const support = useSelector(store => store.support);
   const comments = useSelector(store => store.comments);
+
+  const history = useHistory();
 
   const handlePost = (event) => {
     event.preventDefault();
@@ -26,6 +29,8 @@ function Review() {
     }).catch((err) => {
       console.error('handleSubmit fail:', err)
     })
+
+    history.push('/thank-you')
   }
 
   return (
